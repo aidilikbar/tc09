@@ -12,7 +12,8 @@ class TruckController extends Controller
      */
     public function index()
     {
-        //
+        $trucks = Actor::all();
+        return view('trucks.index', compact('trucks'));
     }
 
     /**
@@ -20,7 +21,7 @@ class TruckController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -28,7 +29,12 @@ class TruckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'truckid' => 'required',
+            'license_plate' => 'required',
+        ]);
+        Actor::create($request->all());
+        return redirect()->route('trucks.index')->with('success', 'Truck created successfully.');
     }
 
     /**
@@ -36,7 +42,7 @@ class TruckController extends Controller
      */
     public function show(Truck $truck)
     {
-        //
+        return view('trucks.show', compact('truck'));
     }
 
     /**
@@ -44,7 +50,7 @@ class TruckController extends Controller
      */
     public function edit(Truck $truck)
     {
-        //
+        return view('trucks.edit', compact('truck'));
     }
 
     /**
@@ -52,7 +58,8 @@ class TruckController extends Controller
      */
     public function update(Request $request, Truck $truck)
     {
-        //
+        $actor->update($request->all());
+        return redirect()->route('trucks.index')->with('success', 'Truck updated successfully.');
     }
 
     /**
@@ -60,6 +67,7 @@ class TruckController extends Controller
      */
     public function destroy(Truck $truck)
     {
-        //
+        $actor->delete();
+        return redirect()->route('trucks.index')->with('success', 'Truck deleted successfully.');
     }
 }

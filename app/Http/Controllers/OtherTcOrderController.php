@@ -12,7 +12,8 @@ class OtherTcOrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Actor::all();
+        return view('other_tc_orders.index', compact('orders'));
     }
 
     /**
@@ -20,7 +21,7 @@ class OtherTcOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('other_tc_orders.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class OtherTcOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'othertcorderid' => 'required',
+            'other_tc_id' => 'required',
+            'dcid' => 'required',
+            'spid' => 'required',
+            'bidfee' => 'required|numeric',
+            'status' => 'required',
+        ]);
+        Actor::create($request->all());
+        return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order created successfully.');
     }
 
     /**
@@ -36,7 +46,7 @@ class OtherTcOrderController extends Controller
      */
     public function show(OtherTcOrder $otherTcOrder)
     {
-        //
+        return view('other_tc_orders.show', compact('order'));
     }
 
     /**
@@ -44,7 +54,7 @@ class OtherTcOrderController extends Controller
      */
     public function edit(OtherTcOrder $otherTcOrder)
     {
-        //
+        return view('other_tc_orders.edit', compact('order'));
     }
 
     /**
@@ -52,7 +62,8 @@ class OtherTcOrderController extends Controller
      */
     public function update(Request $request, OtherTcOrder $otherTcOrder)
     {
-        //
+        $actor->update($request->all());
+        return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order updated successfully.');
     }
 
     /**
@@ -60,6 +71,7 @@ class OtherTcOrderController extends Controller
      */
     public function destroy(OtherTcOrder $otherTcOrder)
     {
-        //
+        $actor->delete();
+        return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order deleted successfully.');
     }
 }

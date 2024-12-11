@@ -12,7 +12,8 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        //
+        $deliveries = Actor::all();
+        return view('deliveries.index', compact('deliveries'));
     }
 
     /**
@@ -20,7 +21,7 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        //
+        return view('deliveries.create');
     }
 
     /**
@@ -28,7 +29,12 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'truckid' => 'required',
+            'license_plate' => 'required',
+        ]);
+        Actor::create($request->all());
+        return redirect()->route('deliveries.index')->with('success', 'Delivery created successfully.');
     }
 
     /**
@@ -36,7 +42,7 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery)
     {
-        //
+        return view('deliveries.show', compact('delivery'));
     }
 
     /**
@@ -44,7 +50,7 @@ class DeliveryController extends Controller
      */
     public function edit(Delivery $delivery)
     {
-        //
+        return view('deliveries.edit', compact('delivery'));
     }
 
     /**
@@ -52,7 +58,8 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, Delivery $delivery)
     {
-        //
+        $actor->update($request->all());
+        return redirect()->route('deliveries.index')->with('success', 'Delivery updated successfully.');
     }
 
     /**
@@ -60,6 +67,7 @@ class DeliveryController extends Controller
      */
     public function destroy(Delivery $delivery)
     {
-        //
+        $actor->delete();
+        return redirect()->route('deliveries.index')->with('success', 'Delivery deleted successfully.');
     }
 }
