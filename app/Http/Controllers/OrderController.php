@@ -12,7 +12,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -28,7 +29,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'orderid' => 'required',
+            'tcid' => 'required',
+            'dcid' => 'required',
+            'spid' => 'required',
+            'pallet' => 'required|numeric',
+            'fee' => 'required|numeric',
+            'status' => 'required',
+        ]);
+        Order::create($request->all());
+        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }
 
     /**
@@ -36,7 +47,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -44,7 +55,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -52,7 +63,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'orderid' => 'required',
+            'tcid' => 'required',
+            'dcid' => 'required',
+            'spid' => 'required',
+            'pallet' => 'required|numeric',
+            'fee' => 'required|numeric',
+            'status' => 'required',
+        ]);
+        $order->update($request->all());
+        return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
     }
 
     /**
@@ -60,6 +81,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
     }
 }

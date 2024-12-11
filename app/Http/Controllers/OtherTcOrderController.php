@@ -12,7 +12,7 @@ class OtherTcOrderController extends Controller
      */
     public function index()
     {
-        $orders = Actor::all();
+        $orders = OtherTCOrder::all();
         return view('other_tc_orders.index', compact('orders'));
     }
 
@@ -37,7 +37,7 @@ class OtherTcOrderController extends Controller
             'bidfee' => 'required|numeric',
             'status' => 'required',
         ]);
-        Actor::create($request->all());
+        Order::create($request->all());
         return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order created successfully.');
     }
 
@@ -62,7 +62,15 @@ class OtherTcOrderController extends Controller
      */
     public function update(Request $request, OtherTcOrder $otherTcOrder)
     {
-        $actor->update($request->all());
+        $request->validate([
+            'othertcorderid' => 'required',
+            'other_tc_id' => 'required',
+            'dcid' => 'required',
+            'spid' => 'required',
+            'bidfee' => 'required|numeric',
+            'status' => 'required',
+        ]);
+        $order->update($request->all());
         return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order updated successfully.');
     }
 
@@ -71,7 +79,7 @@ class OtherTcOrderController extends Controller
      */
     public function destroy(OtherTcOrder $otherTcOrder)
     {
-        $actor->delete();
+        $order->delete();
         return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order deleted successfully.');
     }
 }

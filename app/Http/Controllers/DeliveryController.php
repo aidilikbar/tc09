@@ -12,7 +12,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $deliveries = Actor::all();
+        $deliveries = Delivery::all();
         return view('deliveries.index', compact('deliveries'));
     }
 
@@ -30,10 +30,14 @@ class DeliveryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'truckid' => 'required',
-            'license_plate' => 'required',
+            'tcid' => 'required',
+            'dcid' => 'required',
+            'spid' => 'required',
+            'pallet' => 'required|numeric',
+            'fee' => 'required|numeric',
+            'delivery_status' => 'required',
         ]);
-        Actor::create($request->all());
+        Delivery::create($request->all());
         return redirect()->route('deliveries.index')->with('success', 'Delivery created successfully.');
     }
 
@@ -58,7 +62,15 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, Delivery $delivery)
     {
-        $actor->update($request->all());
+        $request->validate([
+            'tcid' => 'required',
+            'dcid' => 'required',
+            'spid' => 'required',
+            'pallet' => 'required|numeric',
+            'fee' => 'required|numeric',
+            'delivery_status' => 'required',
+        ]);
+        $delivery->update($request->all());
         return redirect()->route('deliveries.index')->with('success', 'Delivery updated successfully.');
     }
 
@@ -67,7 +79,7 @@ class DeliveryController extends Controller
      */
     public function destroy(Delivery $delivery)
     {
-        $actor->delete();
+        $delivery->delete();
         return redirect()->route('deliveries.index')->with('success', 'Delivery deleted successfully.');
     }
 }

@@ -12,7 +12,7 @@ class TruckController extends Controller
      */
     public function index()
     {
-        $trucks = Actor::all();
+        $trucks = Truck::all();
         return view('trucks.index', compact('trucks'));
     }
 
@@ -21,7 +21,7 @@ class TruckController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('trucks.create');
     }
 
     /**
@@ -30,10 +30,14 @@ class TruckController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'truckid' => 'required',
             'license_plate' => 'required',
+            'height' => 'required|numeric',
+            'width' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'capacity' => 'required|numeric',
+            'truck_status' => 'required',
         ]);
-        Actor::create($request->all());
+        Truck::create($request->all());
         return redirect()->route('trucks.index')->with('success', 'Truck created successfully.');
     }
 
@@ -58,7 +62,15 @@ class TruckController extends Controller
      */
     public function update(Request $request, Truck $truck)
     {
-        $actor->update($request->all());
+        $request->validate([
+            'license_plate' => 'required',
+            'height' => 'required|numeric',
+            'width' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'capacity' => 'required|numeric',
+            'truck_status' => 'required',
+        ]);
+        $truck->update($request->all());
         return redirect()->route('trucks.index')->with('success', 'Truck updated successfully.');
     }
 

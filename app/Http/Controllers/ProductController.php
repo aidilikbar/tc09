@@ -12,7 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Actor::all();
+        $products = Product::all();
         return view('products.index', compact('products'));
     }
 
@@ -30,10 +30,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'productid' => 'required',
             'sku' => 'required',
+            'product_name' => 'required',
         ]);
-        Actor::create($request->all());
+        Product::create($request->all());
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
@@ -58,7 +58,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $actor->update($request->all());
+        $request->validate([
+            'sku' => 'required',
+            'product_name' => 'required',
+        ]);
+        $product->update($request->all());
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
@@ -67,7 +71,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $actor->delete();
+        $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 }
