@@ -1,0 +1,45 @@
+/* General Theme Colors */
+:root {
+    --primary-blue: #003366; /* Main blue color */
+    --secondary-blue: #001a33; /* Darker blue for footer bottom */
+    --light-blue: #d9e8ff; /* Soft blue for text */
+    --white: #ffffff; /* White color for text */
+    --light-header: #f0f8ff; /* Light blue for headers */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.navbar .navbar-brand, .navbar .nav-link {
+    color: var(--light-blue);
+}
+
+.navbar .navbar-brand:hover, .navbar .nav-link:hover {
+    color: var(--light-header);
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+footer h5 {
+    color: var(--light-header);
+}
+
+footer p, footer a {
+    color: var(--light-blue);
+}
+
+footer a:hover {
+    color: var(--light-header);
+}
+
+footer .footer-bottom {
+    background-color: var(--secondary-blue);
+    color: var(--light-header);
+}
