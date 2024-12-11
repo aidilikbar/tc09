@@ -12,8 +12,8 @@ class OtherTcOrderController extends Controller
      */
     public function index()
     {
-        $orders = OtherTCOrder::all();
-        return view('other_tc_orders.index', compact('orders'));
+        $otherTcOrders = OtherTCOrder::all();
+        return view('other_tc_orders.index', compact('otherTcOrders'));
     }
 
     /**

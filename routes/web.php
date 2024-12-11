@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 // Default welcome page route
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+use App\Http\Controllers\HomeController;
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Add resource routes for tc09 entities
 use App\Http\Controllers\ActorController;
