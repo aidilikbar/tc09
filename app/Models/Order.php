@@ -20,15 +20,15 @@ class Order extends Model
         'tcid',
         'order_status',
         'order_fee',
+        'sku', // Add SKU field here
+        'quantity' // Add Quantity field
     ];
 
     public $timestamps = false;
 
-    // Define the many-to-many relationship with Product
-    public function products()
+    // Define the one-to-one relationship with Product
+    public function product()
     {
-        return $this->belongsToMany(Product::class, 'product_order')
-                    ->withPivot('quantity')
-                    ->withTimestamps();
+        return $this->belongsTo(Product::class, 'sku', 'sku');
     }
 }

@@ -4,8 +4,9 @@
 
 @section('content')
 <div class="container">
-    <h1>Order Details</h1>
-    <table class="table table-bordered">
+    <h1 class="mb-4">Order Details</h1>
+    <h3>Order Information</h3>
+    <table class="table table-bordered mb-4">
         <tr>
             <th>ID</th>
             <td>{{ $order->order_id }}</td>
@@ -32,33 +33,35 @@
         </tr>
         <tr>
             <th>Status</th>
-            <td>{{ $order->status }}</td>
+            <td>{{ $order->order_status }}</td>
         </tr>
         <tr>
             <th>Order Fee</th>
-            <td>{{ $order->fee }}</td>
+            <td>{{ $order->order_fee }}</td>
         </tr>
     </table>
-    <h3>Products</h3>
+    <h3>Product Information</h3>
     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>SKU</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($order->products as $product)
-                <tr>
-                    <td>{{ $product->sku }}</td>
-                    <td>{{ $product->product_name }}</td>
-                    <td>{{ $product->pivot->quantity }}</td>
-                </tr>
-            @endforeach
-        </tbody>
+        @if ($order->product)
+        <tr>
+            <th>SKU</th>
+            <td>{{ $order->product->sku }}</td>
+        </tr>
+        <tr>
+            <th>Product Name</th>
+            <td>{{ $order->product->product_name }}</td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td>{{ $order->quantity }}</td>
+        </tr>
+        @else
+        <tr>
+            <td colspan="2">No product associated with this order.</td>
+        </tr>
+        @endif
     </table>
-    <a href="{{ route('orders.index') }}" class="btn btn-primary">
+    <a href="{{ route('orders.index') }}" class="btn btn-primary mt-3">
         <i class="fas fa-arrow-left"></i> Back
     </a>
 </div>

@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('product')->get(); // Include related product details
         return view('orders.index', compact('orders'));
     }
 
@@ -26,7 +26,7 @@ class OrderController extends Controller
         // Fetch actors with roles DC and SP
         $dcActors = Actor::where('roles', 'dc')->get();
         $spActors = Actor::where('roles', 'sp')->get();
-        $products = Product::all(); // Fetch all products
+        $products = Product::all(['sku', 'product_name']);
 
         return view('orders.create', compact('dcActors', 'spActors', 'products'));
     }
@@ -37,18 +37,20 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'orderid' => 'required',
-            'tcid' => 'required',
+            'orderid' => 'required|unique:orders',
+            'customer' => 'required',
             'dcid' => 'required',
             'spid' => 'required',
-            'pallet' => 'required|numeric',
-            'fee' => 'required|numeric',
+            'tcid' => 'required',
+            'sku' => 'required|exists:products,sku',
+            'quantity' => 'required|integer|min:1',
             'order_status' => 'required',
-            'products' => 'required|array',
-            'quantities' => 'required|array',
+            'order_fee' => 'nullable|numeric',
         ]);
-        //Order::create($request->all());
-        //return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        Order::create($request->all());
+        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+
+        /*
         $order = Order::create($request->only([
             'orderid',
             'customer',
@@ -67,6 +69,7 @@ class OrderController extends Controller
         $order->products()->sync($productData);
     
         return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        */
     }
 
     /**
@@ -74,7 +77,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        $product = Product::where('sku', $order->sku)->first();
+        return view('orders.show', compact('order', 'product'));
     }
 
     /**
@@ -85,7 +89,7 @@ class OrderController extends Controller
         // Fetch actors with roles DC and SP
         $dcActors = Actor::where('roles', 'dc')->get();
         $spActors = Actor::where('roles', 'sp')->get();
-        $products = Product::all(); // Fetch all products
+        $products = Product::all(['sku', 'product_name']);
 
         return view('orders.edit', compact('order', 'dcActors', 'spActors', 'products'));
         
@@ -98,18 +102,19 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $request->validate([
-            'orderid' => 'required',
-            'tcid' => 'required',
+            'orderid' => 'required|unique:orders,orderid,' . $order->id,
+            'customer' => 'required',
             'dcid' => 'required',
             'spid' => 'required',
-            'pallet' => 'required|numeric',
-            'fee' => 'required|numeric',
+            'tcid' => 'required',
+            'sku' => 'required|exists:products,sku',
+            'quantity' => 'required|integer|min:1',
             'order_status' => 'required',
-            'products' => 'required|array',
-            'quantities' => 'required|array',
+            'order_fee' => 'nullable|numeric',
         ]);
-        //$order->update($request->all());
-        //return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+        $order->update($request->all());
+        return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+        /*
         // Sync products with quantities
         $productData = [];
         foreach ($request->products as $index => $productId) {
@@ -118,6 +123,7 @@ class OrderController extends Controller
         $order->products()->sync($productData);
 
         return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+        */
     }
 
     /**
