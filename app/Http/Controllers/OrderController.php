@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Actor;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -21,7 +22,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        // Fetch actors with roles DC and SP
+        $dcActors = Actor::where('roles', 'dc')->get();
+        $spActors = Actor::where('roles', 'sp')->get();
+
+        return view('orders.create', compact('dcActors', 'spActors'));
     }
 
     /**

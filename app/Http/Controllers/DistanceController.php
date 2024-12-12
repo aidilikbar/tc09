@@ -34,9 +34,9 @@ class DistanceController extends Controller
         $result = $googleDistanceService->getDistance($origins, $destinations);
 
         if (isset($result['error'])) {
-            return redirect()->back()->withErrors(['error' => $result['error']]);
+            return redirect()->back()->withErrors(['error' => $result['error']])->withInput();
         }
 
-        return redirect()->back()->with('result', $result);
+        return redirect()->back()->with('result', $result)->withInput();
     }
 }

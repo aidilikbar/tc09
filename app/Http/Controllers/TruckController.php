@@ -79,7 +79,7 @@ class TruckController extends Controller
      */
     public function destroy(Truck $truck)
     {
-        $actor->delete();
+        $truck->delete();
         return redirect()->route('trucks.index')->with('success', 'Truck deleted successfully.');
     }
 }
