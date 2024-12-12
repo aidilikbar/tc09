@@ -9,11 +9,11 @@
         @csrf
         <div class="mb-3">
             <label for="origins" class="form-label">Origin Coordinates</label>
-            <input type="text" class="form-control" id="origins" name="origins" placeholder="e.g., 52.2545121,6.7766951" required>
+            <input type="text" class="form-control" id="origins" name="origins" placeholder="e.g., 52.2545121,6.7766951" required value="{{ old('origins') }}">
         </div>
         <div class="mb-3">
             <label for="destinations" class="form-label">Destination Coordinates</label>
-            <input type="text" class="form-control" id="destinations" name="destinations" placeholder="e.g., 52.3546102,6.6660272" required>
+            <input type="text" class="form-control" id="destinations" name="destinations" placeholder="e.g., 52.3546102,6.6660272" required value="{{ old('destinations') }}">
         </div>
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-search-location"></i> Calculate
