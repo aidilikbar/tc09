@@ -32,6 +32,12 @@ class ActorController extends Controller
         $request->validate([
             'actorid' => 'required',
             'roles' => 'required',
+            'address' => 'required',
+            'postal_code' => 'nullable',
+            'city' => 'required',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+            'geolocation' => 'nullable',
         ]);
         Actor::create($request->all());
         return redirect()->route('actors.index')->with('success', 'Actor created successfully.');
@@ -58,6 +64,16 @@ class ActorController extends Controller
      */
     public function update(Request $request, Actor $actor)
     {
+        $request->validate([
+            'actorid' => 'required',
+            'roles' => 'required',
+            'address' => 'required',
+            'postal_code' => 'nullable',
+            'city' => 'required',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+            'geolocation' => 'nullable',
+        ]);
         $actor->update($request->all());
         return redirect()->route('actors.index')->with('success', 'Actor updated successfully.');
     }

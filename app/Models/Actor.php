@@ -10,6 +10,7 @@ class Actor extends Model
     use HasFactory;
 
     protected $table = 'actors';
+    protected $primaryKey = 'actor_id';
 
     protected $fillable = [
         'actorid',
@@ -21,4 +22,6 @@ class Actor extends Model
         'longitude',
         'geolocation',
     ];
+
+    public $timestamps = false;
 }
