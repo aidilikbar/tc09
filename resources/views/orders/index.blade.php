@@ -25,7 +25,7 @@
         <tbody>
             @foreach ($orders as $order)
             <tr>
-                <td>{{ $order->id }}</td>
+                <td>{{ $order->order_id }}</td>
                 <td>{{ $order->orderid }}</td>
                 <td>{{ $order->tcid }}</td>
                 <td>{{ $order->dcid }}</td>
@@ -34,13 +34,13 @@
                 <td>{{ $order->fee }}</td>
                 <td>{{ $order->status }}</td>
                 <td>
-                    <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('orders.edit', $order->order_id) }}" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('orders.show', $order->order_id) }}" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('orders.destroy', $order->order_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">

@@ -24,7 +24,7 @@
         <tbody>
             @foreach ($trucks as $truck)
             <tr>
-                <td>{{ $truck->id }}</td>
+                <td>{{ $truck->truck_id }}</td>
                 <td>{{ $truck->license_plate }}</td>
                 <td>{{ $truck->height }}</td>
                 <td>{{ $truck->width }}</td>
@@ -32,13 +32,13 @@
                 <td>{{ $truck->capacity }}</td>
                 <td>{{ $truck->truck_status }}</td>
                 <td>
-                    <a href="{{ route('trucks.edit', $truck->id) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('trucks.edit', $truck->truck_id) }}" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="{{ route('trucks.show', $truck->id) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('trucks.show', $truck->truck_id) }}" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <form action="{{ route('trucks.destroy', $truck->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('trucks.destroy', $truck->truck_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">

@@ -25,7 +25,7 @@
         <tbody>
             @foreach ($otherTcOrders as $order)
             <tr>
-                <td>{{ $order->id }}</td>
+                <td>{{ $order->other_tc_order_id }}</td>
                 <td>{{ $order->othertcorderid }}</td>
                 <td>{{ $order->other_tc_id }}</td>
                 <td>{{ $order->dcid }}</td>
@@ -34,13 +34,13 @@
                 <td>{{ $order->order_bid_response ? 'Yes' : 'No' }}</td>
                 <td>{{ $order->other_tc_order_status }}</td>
                 <td>
-                    <a href="{{ route('other-tc-orders.edit', $order->id) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('other-tc-orders.edit', $order->other_tc_order_id) }}" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="{{ route('other-tc-orders.show', $order->id) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('other-tc-orders.show', $order->other_tc_order_id) }}" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <form action="{{ route('other-tc-orders.destroy', $order->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('other-tc-orders.destroy', $order->other_tc_order_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">

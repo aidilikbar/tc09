@@ -25,7 +25,7 @@
         <tbody>
             @foreach ($deliveries as $delivery)
             <tr>
-                <td>{{ $delivery->id }}</td>
+                <td>{{ $delivery->delivery_id }}</td>
                 <td>{{ $delivery->tcid }}</td>
                 <td>{{ $delivery->dcid }}</td>
                 <td>{{ $delivery->spid }}</td>
@@ -34,13 +34,13 @@
                 <td>{{ $delivery->delivery_status }}</td>
                 <td>{{ $delivery->license_plate }}</td>
                 <td>
-                    <a href="{{ route('deliveries.edit', $delivery->id) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('deliveries.edit', $delivery->delivery_id) }}" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="{{ route('deliveries.show', $delivery->id) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('deliveries.show', $delivery->delivery_id) }}" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <form action="{{ route('deliveries.destroy', $delivery->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('deliveries.destroy', $delivery->delivery_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">
