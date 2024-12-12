@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OtherTcOrder;
+use App\Models\Actor;
 use Illuminate\Http\Request;
 
 class OtherTcOrderController extends Controller
@@ -21,7 +22,12 @@ class OtherTcOrderController extends Controller
      */
     public function create()
     {
-        return view('other_tc_orders.create');
+        // Fetch actors by roles
+        $tcActors = Actor::where('roles', 'tc')->get();
+        $dcActors = Actor::where('roles', 'dc')->get();
+        $spActors = Actor::where('roles', 'sp')->get();
+
+        return view('other_tc_orders.create', compact('tcActors', 'dcActors', 'spActors'));
     }
 
     /**

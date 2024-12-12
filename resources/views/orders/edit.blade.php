@@ -41,6 +41,18 @@
             <label for="fee" class="form-label">Order Fee</label>
             <input type="number" step="0.01" class="form-control" id="fee" name="fee" value="{{ $order->fee }}" required>
         </div>
+        <div class="mb-3">
+            <label for="products" class="form-label">Products</label>
+            <div id="product-fields">
+                @foreach ($products as $product)
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="products[]" value="{{ $product->id }}" id="product-{{ $product->id }}">
+                        <label class="form-check-label" for="product-{{ $product->id }}">{{ $product->product_name }}</label>
+                        <input type="number" class="form-control mt-2" name="quantities[]" placeholder="Quantity" min="1" style="width: 100px;">
+                    </div>
+                @endforeach
+            </div>
+        </div>
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Update
         </button>

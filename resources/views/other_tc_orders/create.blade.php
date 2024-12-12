@@ -13,15 +13,30 @@
         </div>
         <div class="mb-3">
             <label for="other_tc_id" class="form-label">Other TC ID</label>
-            <input type="text" class="form-control" id="other_tc_id" name="other_tc_id" required>
+            <select class="form-select" id="other_tc_id" name="other_tc_id" required>
+                <option value="" selected disabled>Select Other TC ID</option>
+                @foreach ($tcActors as $actor)
+                    <option value="{{ $actor->actorid }}">{{ $actor->actorid }} - {{ $actor->address }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="dcid" class="form-label">DC ID</label>
-            <input type="text" class="form-control" id="dcid" name="dcid" required>
+            <select class="form-select" id="dcid" name="dcid" required>
+                <option value="" selected disabled>Select DC ID</option>
+                @foreach ($dcActors as $actor)
+                    <option value="{{ $actor->actorid }}">{{ $actor->actorid }} - {{ $actor->address }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="spid" class="form-label">SP ID</label>
-            <input type="text" class="form-control" id="spid" name="spid" required>
+            <select class="form-select" id="spid" name="spid" required>
+                <option value="" selected disabled>Select SP ID</option>
+                @foreach ($spActors as $actor)
+                    <option value="{{ $actor->actorid }}">{{ $actor->actorid }} - {{ $actor->address }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="bidfee" class="form-label">Bid Fee</label>

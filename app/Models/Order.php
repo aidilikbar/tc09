@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use HasFactory;
+    
     protected $table = 'orders';
     protected $primaryKey = 'order_id';
 
@@ -20,4 +23,12 @@ class Order extends Model
     ];
 
     public $timestamps = false;
+
+    // Define the many-to-many relationship with Product
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_order')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
 }

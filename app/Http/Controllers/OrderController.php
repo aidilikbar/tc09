@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Actor;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,8 +26,9 @@ class OrderController extends Controller
         // Fetch actors with roles DC and SP
         $dcActors = Actor::where('roles', 'dc')->get();
         $spActors = Actor::where('roles', 'sp')->get();
+        $products = Product::all(); // Fetch all products
 
-        return view('orders.create', compact('dcActors', 'spActors'));
+        return view('orders.create', compact('dcActors', 'spActors', 'products'));
     }
 
     /**
@@ -41,9 +43,29 @@ class OrderController extends Controller
             'spid' => 'required',
             'pallet' => 'required|numeric',
             'fee' => 'required|numeric',
-            'status' => 'required',
+            'order_status' => 'required',
+            'products' => 'required|array',
+            'quantities' => 'required|array',
         ]);
-        Order::create($request->all());
+        //Order::create($request->all());
+        //return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        $order = Order::create($request->only([
+            'orderid',
+            'customer',
+            'dcid',
+            'spid',
+            'tcid',
+            'order_status',
+            'order_fee',
+        ]));
+    
+        // Sync products with quantities
+        $productData = [];
+        foreach ($request->products as $index => $productId) {
+            $productData[$productId] = ['quantity' => $request->quantities[$index]];
+        }
+        $order->products()->sync($productData);
+    
         return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }
 
@@ -60,7 +82,14 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('orders.edit', compact('order'));
+        // Fetch actors with roles DC and SP
+        $dcActors = Actor::where('roles', 'dc')->get();
+        $spActors = Actor::where('roles', 'sp')->get();
+        $products = Product::all(); // Fetch all products
+
+        return view('orders.edit', compact('order', 'dcActors', 'spActors', 'products'));
+        
+        //return view('orders.edit', compact('order'));
     }
 
     /**
@@ -75,9 +104,19 @@ class OrderController extends Controller
             'spid' => 'required',
             'pallet' => 'required|numeric',
             'fee' => 'required|numeric',
-            'status' => 'required',
+            'order_status' => 'required',
+            'products' => 'required|array',
+            'quantities' => 'required|array',
         ]);
-        $order->update($request->all());
+        //$order->update($request->all());
+        //return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+        // Sync products with quantities
+        $productData = [];
+        foreach ($request->products as $index => $productId) {
+            $productData[$productId] = ['quantity' => $request->quantities[$index]];
+        }
+        $order->products()->sync($productData);
+
         return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
     }
 

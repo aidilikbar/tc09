@@ -39,6 +39,25 @@
             <td>{{ $order->fee }}</td>
         </tr>
     </table>
+    <h3>Products</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($order->products as $product)
+                <tr>
+                    <td>{{ $product->sku }}</td>
+                    <td>{{ $product->product_name }}</td>
+                    <td>{{ $product->pivot->quantity }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
     <a href="{{ route('orders.index') }}" class="btn btn-primary">
         <i class="fas fa-arrow-left"></i> Back
     </a>
