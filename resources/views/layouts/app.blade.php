@@ -49,6 +49,11 @@
                             <i class="fas fa-tasks"></i> Other TC Orders
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/calculate-distance') }}">
+                            <i class="fas fa-map-marker-alt"></i> Calculate Distance
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -81,6 +86,7 @@
                         <li><a href="{{ route('deliveries.index') }}">Deliveries</a></li>
                         <li><a href="{{ route('orders.index') }}">Orders</a></li>
                         <li><a href="{{ route('other-tc-orders.index') }}">Other TC Orders</a></li>
+                        <li><a href="{{ route('calculate-distance.index') }}">Calculate Distance</a></li>
                     </ul>
                 </div>
             </div>

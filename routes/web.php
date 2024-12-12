@@ -17,6 +17,7 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OtherTcOrderController;
 use App\Http\Controllers\RouteController;
+//use App\Http\Controllers\DistanceController;
 
 Route::resources([
     'actors' => ActorController::class,
@@ -26,4 +27,12 @@ Route::resources([
     'orders' => OrderController::class,
     'other-tc-orders' => OtherTcOrderController::class,
     'routes' => RouteController::class,
+//    'calculate-distance' => DistanceController::class,
 ]);
+
+//use App\Http\Controllers\DistanceController;
+
+use App\Http\Controllers\DistanceController;
+
+Route::get('/calculate-distance', [DistanceController::class, 'index'])->name('calculate-distance.index');
+Route::post('/calculate-distance', [DistanceController::class, 'calculateDistance'])->name('calculate-distance.calculate');
