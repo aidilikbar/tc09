@@ -8,7 +8,7 @@
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
-            <td>{{ $product->id }}</td>
+            <td>{{ $product->product_id }}</td>
         </tr>
         <tr>
             <th>SKU</th>
@@ -19,6 +19,8 @@
             <td>{{ $product->product_name }}</td>
         </tr>
     </table>
-    <a href="{{ route('products.index') }}" class="btn btn-primary">Back</a>
+    <a href="{{ route('products.index') }}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
 </div>
 @endsection

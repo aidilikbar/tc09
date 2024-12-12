@@ -5,7 +5,9 @@
 @section('content')
 <div class="container">
     <h1>Deliveries</h1>
-    <a href="{{ route('deliveries.create') }}" class="btn btn-primary mb-3">Add Delivery</a>
+    <a href="{{ route('deliveries.create') }}" class="btn btn-primary mb-3">
+        <i class="fas fa-plus"></i> Add Delivery
+    </a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -32,12 +34,18 @@
                 <td>{{ $delivery->delivery_status }}</td>
                 <td>{{ $delivery->license_plate }}</td>
                 <td>
-                    <a href="{{ route('deliveries.edit', $delivery->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ route('deliveries.show', $delivery->id) }}" class="btn btn-info btn-sm">View</a>
+                    <a href="{{ route('deliveries.edit', $delivery->id) }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href="{{ route('deliveries.show', $delivery->id) }}" class="btn btn-info btn-sm">
+                        <i class="fas fa-eye"></i> View
+                    </a>
                     <form action="{{ route('deliveries.destroy', $delivery->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                     </form>
                 </td>
             </tr>

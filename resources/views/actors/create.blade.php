@@ -44,8 +44,12 @@
             <label for="geolocation" class="form-label">Geolocation</label>
             <input type="text" class="form-control" id="geolocation" name="geolocation">
         </div>
-        <button type="submit" class="btn btn-success">Save</button>
-        <a href="{{ route('actors.index') }}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Save
+        </button>
+        <a href="{{ route('actors.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
     </form>
 </div>
 @endsection

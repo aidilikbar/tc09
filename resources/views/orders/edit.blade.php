@@ -41,8 +41,12 @@
                 <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Update</button>
-        <a href="{{ route('orders.index') }}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Update
+        </button>
+        <a href="{{ route('orders.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
     </form>
 </div>
 @endsection

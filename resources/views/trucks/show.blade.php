@@ -35,6 +35,8 @@
             <td>{{ $truck->truck_status }}</td>
         </tr>
     </table>
-    <a href="{{ route('trucks.index') }}" class="btn btn-primary">Back</a>
+    <a href="{{ route('trucks.index') }}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
 </div>
 @endsection

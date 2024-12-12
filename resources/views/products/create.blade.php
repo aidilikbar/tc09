@@ -15,8 +15,12 @@
             <label for="product_name" class="form-label">Product Name</label>
             <input type="text" class="form-control" id="product_name" name="product_name" required>
         </div>
-        <button type="submit" class="btn btn-success">Save</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Save
+        </button>
+        <a href="{{ route('products.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
     </form>
 </div>
 @endsection

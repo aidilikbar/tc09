@@ -39,6 +39,8 @@
             <td>{{ $delivery->license_plate }}</td>
         </tr>
     </table>
-    <a href="{{ route('deliveries.index') }}" class="btn btn-primary">Back</a>
+    <a href="{{ route('deliveries.index') }}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
 </div>
 @endsection

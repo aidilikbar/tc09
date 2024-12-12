@@ -43,6 +43,8 @@
             <td>{{ $actor->geolocation }}</td>
         </tr>
     </table>
-    <a href="{{ route('actors.index') }}" class="btn btn-secondary">Back</a>
+    <a href="{{ route('actors.index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
 </div>
 @endsection
