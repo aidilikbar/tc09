@@ -8,7 +8,7 @@
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
-            <td>{{ $delivery->id }}</td>
+            <td>{{ $delivery->delivery_id }}</td>
         </tr>
         <tr>
             <th>TC ID</th>

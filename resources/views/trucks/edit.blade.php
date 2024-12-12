@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Truck</h1>
-    <form action="{{ route('trucks.update', $truck->id) }}" method="POST">
+    <form action="{{ route('trucks.update', $truck->truck_id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">

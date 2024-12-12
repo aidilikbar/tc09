@@ -8,7 +8,7 @@
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
-            <td>{{ $truck->id }}</td>
+            <td>{{ $truck->truck_id }}</td>
         </tr>
         <tr>
             <th>License Plate</th>

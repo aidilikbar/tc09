@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Other TC Order</h1>
-    <form action="{{ route('other-tc-orders.update', $order->id) }}" method="POST">
+    <form action="{{ route('other-tc-orders.update', $order->other_tc_order_id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">
