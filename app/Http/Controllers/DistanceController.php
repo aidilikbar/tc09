@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\GoogleDistanceService;
+use App\Models\Actor;
 use Illuminate\Http\Request;
 
 class DistanceController extends Controller
@@ -16,27 +17,24 @@ class DistanceController extends Controller
 
     public function index()
     {
-        return view('calculate_distance');
+        $actors = Actor::all(); // Fetch all actors
+        return view('calculate_distance', compact('actors'));
     }
 
     public function calculateDistance(Request $request)
     {
         $request->validate([
-            'origins' => 'required|string',
-            'destinations' => 'required|string',
+            'origins' => 'required',
+            'destinations' => 'required',
         ]);
-
-        $googleDistanceService = app()->make(\App\Services\GoogleDistanceService::class);
 
         $origins = $request->input('origins');
         $destinations = $request->input('destinations');
 
-        $result = $googleDistanceService->getDistance($origins, $destinations);
+        // Call the service to get the distance and JSON response
+        $result = $this->googleDistanceService->calculateDistance($origins, $destinations);
 
-        if (isset($result['error'])) {
-            return redirect()->back()->withErrors(['error' => $result['error']])->withInput();
-        }
-
-        return redirect()->back()->with('result', $result)->withInput();
+        // Pass results and input values back to the session
+        return back()->with(['result' => $result])->withInput();
     }
 }

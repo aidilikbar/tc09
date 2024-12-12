@@ -6,31 +6,40 @@ use Illuminate\Support\Facades\Http;
 
 class GoogleDistanceService
 {
-    public function getDistance($origins, $destinations)
-    {
-        $apiKey = config('services.google_maps.api_key');
-        $url = "https://maps.googleapis.com/maps/api/distancematrix/json";
+    protected $apiKey;
 
+    public function __construct()
+    {
+        $this->apiKey = env('GOOGLE_MAPS_API_KEY'); // Ensure you have the API key in your .env file
+    }
+
+    public function calculateDistance($origins, $destinations)
+    {
+        $url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
+
+        // Make a GET request to the Google Distance Matrix API
         $response = Http::get($url, [
             'origins' => $origins,
             'destinations' => $destinations,
-            'key' => $apiKey,
+            'key' => $this->apiKey,
         ]);
 
+        // Check for a successful response
         if ($response->successful()) {
             $data = $response->json();
 
-            // Extract the distance value in meters
-            $distance = $data['rows'][0]['elements'][0]['distance']['value'] ?? null;
+            // Parse the response to extract distance and other relevant information
+            if (isset($data['rows'][0]['elements'][0]['distance'])) {
+                return [
+                    'distance' => $data['rows'][0]['elements'][0]['distance']['value'], // Distance in meters
+                    'full_json' => $data, // Return the full JSON response for reference
+                ];
+            }
 
-            return [
-                'full_json' => $data,
-                'distance' => $distance, // distance in meters
-            ];
+            return ['error' => 'Unable to calculate distance. Please check the coordinates.'];
         }
 
-        return [
-            'error' => 'Failed to fetch data from Google Maps API',
-        ];
+        // Handle failed responses
+        return ['error' => 'Failed to connect to the Google Distance Matrix API.'];
     }
 }
