@@ -13,8 +13,8 @@
             <input type="text" class="form-control" id="orderid" name="orderid" value="{{ $order->orderid }}" required>
         </div>
         <div class="mb-3">
-            <label for="tcid" class="form-label">TC ID</label>
-            <input type="text" class="form-control" id="tcid" name="tcid" value="{{ $order->tcid }}" required>
+            <label for="customer" class="form-label">Customer</label>
+            <input type="text" class="form-control" id="customer" name="customer" value="{{ $order->customer }}" required>
         </div>
         <div class="mb-3">
             <label for="dcid" class="form-label">DC ID</label>
@@ -25,21 +25,21 @@
             <input type="text" class="form-control" id="spid" name="spid" value="{{ $order->spid }}" required>
         </div>
         <div class="mb-3">
-            <label for="pallet" class="form-label">Pallet</label>
-            <input type="number" class="form-control" id="pallet" name="pallet" value="{{ $order->pallet }}" required>
+            <label for="tcid" class="form-label">TC ID</label>
+            <input type="text" class="form-control" id="tcid" name="tcid" value="{{ $order->tcid }}" required>
         </div>
         <div class="mb-3">
-            <label for="fee" class="form-label">Fee</label>
-            <input type="number" step="0.01" class="form-control" id="fee" name="fee" value="{{ $order->fee }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
+            <label for="status" class="form-label">Order Status</label>
             <select class="form-select" id="status" name="status" required>
                 <option value="new" {{ $order->status == 'new' ? 'selected' : '' }}>New</option>
                 <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
                 <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
                 <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
             </select>
+        </div>
+        <div class="mb-3">
+            <label for="fee" class="form-label">Order Fee</label>
+            <input type="number" step="0.01" class="form-control" id="fee" name="fee" value="{{ $order->fee }}" required>
         </div>
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Update

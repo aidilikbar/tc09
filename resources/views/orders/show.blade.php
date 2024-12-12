@@ -15,8 +15,8 @@
             <td>{{ $order->orderid }}</td>
         </tr>
         <tr>
-            <th>TC ID</th>
-            <td>{{ $order->tcid }}</td>
+            <th>Customer</th>
+            <td>{{ $order->customer }}</td>
         </tr>
         <tr>
             <th>DC ID</th>
@@ -27,16 +27,16 @@
             <td>{{ $order->spid }}</td>
         </tr>
         <tr>
-            <th>Pallet</th>
-            <td>{{ $order->pallet }}</td>
-        </tr>
-        <tr>
-            <th>Fee</th>
-            <td>{{ $order->fee }}</td>
+            <th>TC ID</th>
+            <td>{{ $order->tcid }}</td>
         </tr>
         <tr>
             <th>Status</th>
             <td>{{ $order->status }}</td>
+        </tr>
+        <tr>
+            <th>Order Fee</th>
+            <td>{{ $order->fee }}</td>
         </tr>
     </table>
     <a href="{{ route('orders.index') }}" class="btn btn-primary">

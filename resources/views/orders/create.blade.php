@@ -12,33 +12,36 @@
             <input type="text" class="form-control" id="orderid" name="orderid" required>
         </div>
         <div class="mb-3">
-            <label for="tcid" class="form-label">TC ID</label>
-            <input type="text" class="form-control" id="tcid" name="tcid" required>
+            <label for="customer" class="form-label">Customer</label>
+            <input type="text" class="form-control" id="customer" name="customer" required>
         </div>
         <div class="mb-3">
             <label for="dcid" class="form-label">DC ID</label>
-            <input type="text" class="form-control" id="dcid" name="dcid" required>
+            <input type="text" class="form-control" id="dcid" name="dcid">
         </div>
         <div class="mb-3">
             <label for="spid" class="form-label">SP ID</label>
-            <input type="text" class="form-control" id="spid" name="spid" required>
+            <input type="text" class="form-control" id="spid" name="spid">
         </div>
         <div class="mb-3">
-            <label for="pallet" class="form-label">Pallet</label>
-            <input type="number" class="form-control" id="pallet" name="pallet" required>
+            <label for="tcid" class="form-label">TC ID</label>
+            <input type="text" class="form-control" id="tcid" name="tcid">
         </div>
         <div class="mb-3">
-            <label for="fee" class="form-label">Fee</label>
-            <input type="number" step="0.01" class="form-control" id="fee" name="fee" required>
-        </div>
-        <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select class="form-select" id="status" name="status" required>
-                <option value="new">New</option>
-                <option value="processed">Processed</option>
+            <label for="order_status" class="form-label">Order Status</label>
+            <select class="form-select" id="order_status" name="order_status" required>
+                <option value="open">Open</option>
+                <option value="open_for_bidding">Open for Bidding</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="assigned">Assigned</option>
+                <option value="assigned_to_other_tc">Assigned to Other TC</option>
                 <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
             </select>
+        </div>
+        <div class="mb-3">
+            <label for="order_fee" class="form-label">Order Fee</label>
+            <input type="number" step="0.01" class="form-control" id="order_fee" name="order_fee">
         </div>
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Save

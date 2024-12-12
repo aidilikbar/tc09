@@ -11,14 +11,14 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Primary ID</th>
                 <th>Order ID</th>
-                <th>TC ID</th>
+                <th>Customer</th>
                 <th>DC ID</th>
                 <th>SP ID</th>
-                <th>Pallet</th>
-                <th>Fee</th>
+                <th>TC ID</th>
                 <th>Status</th>
+                <th>Fee</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,12 +27,12 @@
             <tr>
                 <td>{{ $order->order_id }}</td>
                 <td>{{ $order->orderid }}</td>
-                <td>{{ $order->tcid }}</td>
+                <td>{{ $order->customer }}</td>
                 <td>{{ $order->dcid }}</td>
                 <td>{{ $order->spid }}</td>
-                <td>{{ $order->pallet }}</td>
-                <td>{{ $order->fee }}</td>
-                <td>{{ $order->status }}</td>
+                <td>{{ $order->tcid }}</td>
+                <td>{{ $order->order_status }}</td>
+                <td>{{ $order->order_fee }}</td>
                 <td>
                     <a href="{{ route('orders.edit', $order->order_id) }}" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
