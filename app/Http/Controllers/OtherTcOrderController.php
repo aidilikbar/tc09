@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OtherTcOrder;
 use App\Models\Actor;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OtherTcOrderController extends Controller
@@ -26,25 +27,40 @@ class OtherTcOrderController extends Controller
         $tcActors = Actor::where('roles', 'tc')->get();
         $dcActors = Actor::where('roles', 'dc')->get();
         $spActors = Actor::where('roles', 'sp')->get();
+        $products = Product::all(); // Fetch all products for selection
 
-        return view('other_tc_orders.create', compact('tcActors', 'dcActors', 'spActors'));
+        return view('other_tc_orders.create', compact('tcActors', 'dcActors', 'spActors', 'products'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-        $request->validate([
-            'othertcorderid' => 'required',
+        // Validate the input data
+        $validated = $request->validate([
+            'othertcorderid' => 'required|unique:other_tc_orders,othertcorderid',
             'other_tc_id' => 'required',
             'dcid' => 'required',
             'spid' => 'required',
+            'sku' => 'required',
+            'quantity' => 'required|numeric',
             'bidfee' => 'required|numeric',
-            'status' => 'required',
+            'other_tc_order_status' => 'required',
         ]);
-        Order::create($request->all());
-        return redirect()->route('other-tc-orders.index')->with('success', 'Other TC Order created successfully.');
+     
+        // Debugging: Check the validated data
+        dd($validated); // Uncomment this if you want to inspect the validated data before saving
+     
+        // Create a new OtherTcOrder record
+        $otherTcOrder = OtherTcOrder::create($validated);
+     
+        // Debugging: Check the saved record
+        dd($otherTcOrder); // This will show the saved record to ensure it's saved correctly
+     
+        // Redirect to the index page with a success message
+        return redirect()->route('other_tc_orders.index')->with('success', 'Other TC Order created successfully!');
     }
 
     /**
@@ -52,7 +68,8 @@ class OtherTcOrderController extends Controller
      */
     public function show(OtherTcOrder $otherTcOrder)
     {
-        return view('other_tc_orders.show', compact('order'));
+        $product = $otherTCOrder->product; // Get the associated product
+        return view('other_tc_orders.show', compact('otherTCOrder', 'product'));
     }
 
     /**

@@ -39,6 +39,27 @@
             <td>{{ $order->other_tc_order_status }}</td>
         </tr>
     </table>
+    <h3>Product Information</h3>
+    <table class="table table-bordered">
+        @if ($product)
+        <tr>
+            <th>SKU</th>
+            <td>{{ $product->sku }}</td>
+        </tr>
+        <tr>
+            <th>Product Name</th>
+            <td>{{ $product->product_name }}</td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td>{{ $otherTCOrder->quantity }}</td>
+        </tr>
+        @else
+        <tr>
+            <td colspan="2">No product associated with this order.</td>
+        </tr>
+        @endif
+    </table>
     <a href="{{ route('other-tc-orders.index') }}" class="btn btn-primary">
         <i class="fas fa-arrow-left"></i> Back
     </a>

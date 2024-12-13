@@ -35,6 +35,11 @@ class DistanceController extends Controller
         $result = $this->googleDistanceService->calculateDistance($origins, $destinations);
 
         // Pass results and input values back to the session
-        return back()->with(['result' => $result])->withInput();
+        // Return view with result and old values
+    return back()->with([
+        'result' => $result,
+        'origins' => $origins,
+        'destinations' => $destinations,
+    ])->withInput();
     }
 }
