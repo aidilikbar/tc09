@@ -34,12 +34,20 @@ class DistanceController extends Controller
         // Call the service to get the distance and JSON response
         $result = $this->googleDistanceService->calculateDistance($origins, $destinations);
 
-        // Pass results and input values back to the session
-        // Return view with result and old values
-    return back()->with([
-        'result' => $result,
-        'origins' => $origins,
-        'destinations' => $destinations,
-    ])->withInput();
+        if (isset($result['error'])) {
+            return back()->withErrors(['error' => $result['error']])->withInput();
+        }
+
+        // Extract distance and duration from result
+        $distance = $result['full_json']['rows'][0]['elements'][0]['distance']['text'] ?? 'N/A';
+        $duration = $result['full_json']['rows'][0]['elements'][0]['duration']['text'] ?? 'N/A';
+
+        return back()->with([
+            'result' => $result,
+            'distance' => $distance,
+            'duration' => $duration,
+            'origins' => $origins,
+            'destinations' => $destinations,
+        ])->withInput();
     }
 }
