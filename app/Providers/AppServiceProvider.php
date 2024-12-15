@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
-        }
-    }
     /**
      * Register any application services.
      */
@@ -26,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
