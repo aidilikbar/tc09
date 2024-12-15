@@ -42,6 +42,10 @@
             <p>{{ session('result')['distance'] ?? 'N/A' }} meters</p>
         </div>
         <div class="mb-3">
+            <strong>Duration:</strong>
+            <p>{{ session('result')['duration'] ?? 'N/A' }} meters</p>
+        </div>
+        <div class="mb-3">
             <strong>Full JSON Response:</strong>
             <pre style="background: #f8f9fa; padding: 10px; border: 1px solid #ddd;">
                 {{ json_encode(session('result')['full_json'], JSON_PRETTY_PRINT) }}
